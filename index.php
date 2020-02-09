@@ -5,14 +5,15 @@ require 'DataBase.php';
 $dataBase = new DataBase();
 $router = new Router();
 
-$page = 'home';
+$route = 'home';
 
-if(isset($_GET['page']))
+if(isset($_GET['route']))
 {
-  $page = $_GET['page'];
+  $route = $_GET['route'];
 }
 
 $router->add('home', 'Frontend:listPosts');
 $router->add('show_post', 'Frontend:onePost:2');
+$router->add('apropos', 'Frontend:apropos');
 
-$router->get('show_post');
+$router->get($route);
