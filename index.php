@@ -1,8 +1,6 @@
 <?php
 require 'app/Router.php';
-require 'DataBase.php';
 
-$dataBase = new DataBase();
 $router = new Router();
 
 $route = 'home';
