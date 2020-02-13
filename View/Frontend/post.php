@@ -5,14 +5,13 @@ if(!isset($_GET['id']) || empty($_GET['id']))
   header('Location: index.php');
 }
 
-$post = $dataBase->getPost($_GET['id']);
 
-$comments = $dataBase->getCommentsApproved($_GET['id']);
+//$comments = $dataBase->getCommentsApproved($_GET['id']);
 
 if(!empty($_POST['author']) && !empty($_POST['comment']))
 {
-  $dataBase->postComment($_GET['id'], $_POST['author'], $_POST['comment']);
-  header("Location: index.php?page=post&id=$post->id");
+  $commentManager->postComment($_GET['id'], $_POST['author'], $_POST['comment']); 
+  header("Location: index.php?=post&id=$post->id");
 }
 
 ?>
@@ -20,13 +19,13 @@ if(!empty($_POST['author']) && !empty($_POST['comment']))
     <title>Blog</title>
 
     <h1><?= $post->title ?></h1>
-    <a href="index.php?page=home">Revenir à la page d'accueil</a>
+    <a href="index.php?route=home">Revenir à la page d'accueil</a>
     <em><?= $post->creation_date ?></em>
     <p>
       <?= $post->content ?>
     </p>
     <h2>Ajouter un commentaire</h2>
-    <form action="index.php?page=post&id=<?= $post->id ?>" method="post">
+    <form action="index.php?route=post&id=<?= $post->id ?>" method="post">
       <div>
           <label for="author">Auteur</label>
           <br>
@@ -42,7 +41,7 @@ if(!empty($_POST['author']) && !empty($_POST['comment']))
             <button type="submit">Valider</button>
           </div>
     </form>
-    <?php if(!empty($comments)): ?>
+    <?php if(!empty($comments)):?>
       <div class="comments-list">
         <?php foreach($comments as $comment): ?>
           <h2><?= $comment->author ?> <em><?= $comment->comment_date ?></em></h2>

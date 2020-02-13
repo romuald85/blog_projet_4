@@ -1,14 +1,7 @@
 <?php
 
-if(!empty($_POST['title']) && !empty($_POST['content']))
-{
-  $dataBase->createPost($_POST['title'], $_POST['content']);
-  header('Location: index.php?page=articles');
-}
-
-?>
-
-<a href="index.php?page=articles">Retour</a>
+ob_start(); ?>
+<a href="index.php?route=articles">Retour</a>
 
 <form action="#" method="post">
   <div>
@@ -23,3 +16,7 @@ if(!empty($_POST['title']) && !empty($_POST['content']))
     <button type="submit">Valider</button>
   </div>
 </form>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require 'template.php';

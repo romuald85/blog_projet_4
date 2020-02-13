@@ -1,5 +1,5 @@
 <?php
-require 'Model/Manager.php';
+namespace Model;
 
 class PostManager extends Manager
 {
@@ -30,7 +30,7 @@ class PostManager extends Manager
     if(isset($id, $title, $content))
     {
       $req = $this->db->prepare("UPDATE posts SET id = ?, title = ?, content = ?, creation_date = NOW() WHERE id = ?");
-      $req->execute(array($id, $title, $content));
+      $req->execute(array($id, $title, $content, $id));
     }
   }
 

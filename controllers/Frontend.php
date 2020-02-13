@@ -1,5 +1,8 @@
 <?php
-require_once 'Model/PostManager.php';
+namespace Controllers;
+
+use Model\PostManager;
+use Model\CommentManager;
 
 class Frontend
 {
@@ -12,41 +15,30 @@ class Frontend
 
     // récupération des posts
     $posts = $postManager->getAll('posts');
-
-    // récupération des commentaires
-    $comments = $postManager->getAll('comments');
-
-     ob_start(); ?>
-        <h1>Mon blog</h1>
-        <div id="posts">
-          <?php if(!empty($posts)): ?>
-              <div class="posts-list">
-            <?php foreach($posts as $post): ?>
-              <h2><?= $post->title ?>
-                <br>
-                <em><?= $post->creation_date ?></em> </h2>
-              <p><?= $this->ellipsis($post->content) ?><a href="index.php?page=post&id=<?= $post->id ?>">Voir la suite</a></p>
-            <?php endforeach ?>
-            </div>
-          <?php endif ?>
-        </div>
-        <?php $content = ob_get_clean(); ?>
-
-        <?php require 'template.php';
-
+    require 'View/Frontend/home.php';
   }
 
-  public function onePost($id)
+  public function onePost()
   {
-    echo 'Voici le poste numéro ' . $id;
+    $postManager = new PostManager();
+    $commentManager = new CommentManager();
+    $post = $postManager->getPost($_GET['id']);
+    $comments = $commentManager->getPostComments($_GET['id']);
+
+    require 'View/Frontend/post.php';
   }
 
-  public function apropos()
+  public function addComment()
   {
-    echo 'A propos de nous';
+    $commentManager = new CommentManager();
+    $commentManager->postComment($post_id, $author, $comment);
+
+
+
+    require 'View/Frontend/post.php';
   }
 
-  function ellipsis($content)
+  public function ellipsis($content)
   {
     return substr($content, 0, 60) . '...';
   }

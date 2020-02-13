@@ -1,5 +1,5 @@
 <?php
-require 'Model/Manager.php';
+namespace Model;
 
 class CommentManager extends Manager
 {

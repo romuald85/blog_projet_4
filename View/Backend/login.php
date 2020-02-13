@@ -1,20 +1,3 @@
-<?php
-session_start();
-
-if(!empty($_POST['login']) && !empty($_POST['password']))
-{
-  if($dataBase->userExists($_POST['login'], $_POST['password']) === false)
-  {
-    echo 'Les identifiants sont invalides !';
-  }
-  else
-  {
-    $_SESSION['user'] = $_POST['login'];
-    header('Location: index.php?page=admin');
-  }
-}
-?>
-
 <?php ob_start(); ?>
     <h1>Administration</h1>
 

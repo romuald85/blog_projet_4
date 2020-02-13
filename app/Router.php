@@ -1,4 +1,5 @@
 <?php
+namespace App;
 
 class Router
 {
@@ -21,8 +22,8 @@ class Router
     }
 
     // etape 2: on instancie le controller récupéré précédemment
-    require 'controllers/' . $controllerName . '.php';
-    $controller = new $controllerName;
+    $class = 'Controllers\\' . $controllerName;
+    $controller = new $class;
 
     // etape 3: on éxécute l'action du controller
     if(isset($id))

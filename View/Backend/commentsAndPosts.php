@@ -1,10 +1,7 @@
 <?php
 
-$posts = $dataBase->getAll('posts');
-
-?>
-
-<a href="index.php?page=admin">Retour</a>
+ob_start(); ?>
+<a href="index.php?route=admin">Retour</a>
 
 <?php if(!empty($posts)): ?>
   <div>
@@ -14,7 +11,11 @@ $posts = $dataBase->getAll('posts');
     <em><?= $post->creation_date ?></em>
     <br>
     <p><?= $post->content ?></p>
-    <a href="index.php?page=comments&id=<?= $post->id ?>">Modérer les commentaires</a>
+    <a href="index.php?route=comments&id=<?= $post->id ?>">Modérer les commentaires</a>
     <?php endforeach; ?>
   </div>
 <?php endif; ?>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require 'template.php';
