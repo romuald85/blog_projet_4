@@ -5,6 +5,7 @@ class Router
 {
   public $routes = [];
 
+  // Ajouter le nom de la route et la valeur ex: add('home, frontend:onePost')
   public function add($name, $value)
   {
     $this->routes[$name] = $value;

@@ -1,0 +1,19 @@
+html, body
+{
+  height: 100%;
+}
+
+.container
+{
+  max-width:400px;
+  display: table;
+  height: 30%;
+  min-height: 30%;
+  margin-top: 200px;
+}
+
+form
+{
+  display: table-cell;
+  vertical-align: middle;
+}

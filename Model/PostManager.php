@@ -10,6 +10,7 @@ class PostManager extends Manager
     $this->db = $this->dbConnect();
   }
 
+  // Récupère les articles
   public function getAll($table)
   {
     $req = $this->db->prepare("SELECT * FROM {$table} ORDER BY id DESC");
@@ -17,6 +18,7 @@ class PostManager extends Manager
     return $req->fetchAll();
   }
 
+  // Récupère l'article en fonction de l'id
   public function getPost($id)
   {
     $req = $this->db->prepare("SELECT * FROM posts WHERE id = {$id}");
@@ -25,6 +27,7 @@ class PostManager extends Manager
     return $req->fetch();
   }
 
+  // Mise à jour des articles
   public function updatePosts($id, $title, $content)
   {
     if(isset($id, $title, $content))
@@ -34,6 +37,7 @@ class PostManager extends Manager
     }
   }
 
+  // Poste de nouveaux articles
   public function createPost($title, $content)
   {
     if(isset($title, $content))
@@ -43,6 +47,7 @@ class PostManager extends Manager
     }
   }
 
+  // Suppression d'article selon l'id
   public function deletePost($id)
   {
     if(empty($id))

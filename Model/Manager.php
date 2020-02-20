@@ -3,6 +3,7 @@ namespace Model;
 
 use \PDO;
 
+// Connexion à la base de données
 class Manager
 {
   protected function dbConnect()

@@ -1,26 +1,33 @@
 <?php
 
 ob_start(); ?>
-<a href="index.php?route=articles">Retour</a>
+  <a href="index.php?route=articles" class="btn btn-danger">Retour</a>
 
-<h1>Mon article à modifier: </h1>
+  <h1 class="text-center">Mon article à modifier: </h1>
 
-<form action="#" method="post">
-  <div>
-    <label for="title">Titre</label>
-    <br>
-    <input id="title" type="text" name="title" value="<?= $post->title ?>">
-    <br>
-    <label for="content">Contenu</label>
-    <br>
-    <textarea id="contentPost" name="content" rows="8" cols="80"><?= $post->content ?></textarea>
-    <br>
-    <button type="submit">Valider</button>
-    <br>
-    <a href="index.php?route=update&id=<?= $post->id ?>&action=delete">Supprimer l'article</a>
+  <div class="container">
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <br>
+        <input id="title" type="text" name="title" value="<?= $post->title ?>" class="form-control">
+        <br>
+      </div>
+      <div class="form-group">
+        <label for="content">Contenu</label>
+        <br>
+        <textarea id="contentPost" name="content" rows="8" cols="80" class="form-control">
+          <?= $post->content ?>
+        </textarea>
+        <br>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+        <br>
+      </div>
+      <a href="index.php?route=update&id=<?= $post->id ?>&action=delete" class="btn btn-danger">Supprimer l'article</a>
+  </form>
   </div>
-</form>
+  <?php $content = ob_get_clean(); ?>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require 'template.php';
+    <?php require 'template.php';

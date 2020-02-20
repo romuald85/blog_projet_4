@@ -4,6 +4,7 @@ class Autoloader
 {
   static function register()
   {
+    // Appel la fonction 'autoload' qui se trouve dans cette class 
     spl_autoload_register(array(__CLASS__, 'autoload'));
   }
 

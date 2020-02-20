@@ -1,0 +1,88 @@
+html, body
+{
+  height: 100%;
+}
+
+.header-image
+{
+  margin-top: 150px;
+}
+
+.image-paysage
+{
+  height: 450px;
+  width: 100%;
+  margin-top: -150px;
+  margin-bottom: 50px;
+}
+
+.container-header
+{
+  margin-bottom: 10px
+  border: 1px solid;
+  height: 10px;
+}
+
+
+.container
+{
+  display: table;
+  height: 20%;
+  min-height: 20%;
+}
+
+#image-alaska
+{
+  height: 180px;
+  width: 180px;
+}
+
+.profile
+{
+  margin-right: 40px;
+}
+
+.profile aside p
+{
+  font-size: 12px;
+}
+
+.profile aside ul li
+{
+  float: left;
+  margin-right: 8px;
+}
+
+.profile aside ul
+{
+  list-style: none;
+  padding: 0px;
+}
+
+.formulaire
+{
+  display: table;
+  height: 30%;
+  min-height: 30%;
+}
+
+form
+{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.comment, .write-comment, .titre-article
+{
+  margin-top: 50px;
+}
+
+aside
+{
+  padding-top: 50px;
+}
+
+.bouton
+{
+  margin-bottom: 20px;
+}

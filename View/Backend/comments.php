@@ -1,14 +1,16 @@
 <?php
 
 ob_start(); ?>
-<a href="index.php?route=commentsAndPosts">Retour</a>
+<a href="index.php?route=commentsAndPosts" class="btn btn-danger">Retour</a>
 
-<h1>Modérer les commentaires</h1>
+<h2 class="text-center">Modérer les commentaires</h2>
 
 <?php if(!empty($comments)): ?>
-  <div>
+  <div class="container">
     <?php foreach($comments as $comment): ?>
-      <h2><?= $comment->author ?> <em><?= $comment->comment_date ?></em></h2>
+      <h3><?= $comment->author ?></h3>
+       <p class="font-italic"><?= $comment->comment_date ?></p>
+       <p>#<?= $comment->id ?></p>
       <p>
         <?= $comment->comment ?>
       </p>

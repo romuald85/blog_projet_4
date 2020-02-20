@@ -12,6 +12,7 @@ class Backend
   {
     $usersExists = new UsersManager();
 
+    // Récupère le login et le mdp
     if(!empty($_POST['login']) && !empty($_POST['password']))
     {
       if($usersExists->userExists($_POST['login'], $_POST['password']) === false)
@@ -20,6 +21,7 @@ class Backend
       }
       else
       {
+        // Entame la session de connexion
         $_SESSION['user'] = $_POST['login'];
         header('Location: index.php?route=admin');
       }
@@ -31,17 +33,20 @@ class Backend
   {
     if(!isset($_SESSION['user']))
     {
+      // Renvoi vers la page login si l' utilisateur n'existe pas
       header('Location: index.php?route=login');
     }
 
     if(isset($_GET['deconnect']))
     {
+      // Fin de session de connexion
       unset($_SESSION['user']);
       header('Location: index.php?route=login');
     }
     require 'View/Backend/admin.php';
   }
 
+  // Récupère tous les articles
   public function articles()
   {
     $postManager = new PostManager();
@@ -71,7 +76,7 @@ class Backend
       header('Location: index.php?route=articles');
     }
 
-
+    // Fonction qui permet de supprimer un article
     if(isset($_GET['action']) && $_GET['action'] === 'delete')
     {
       $updatePost->deletePost($_GET['id']);
@@ -81,6 +86,7 @@ class Backend
     require 'View/Backend/update.php';
   }
 
+  // Fonction qui récupère les articles dans la page commentsAndPosts sera affiché un lien qui renverra vers les commentaires de l'article en question
   public function commentsAndPosts()
   {
     $postManager = new PostManager();
@@ -89,6 +95,7 @@ class Backend
     require 'View/Backend/commentsAndPosts.php';
   }
 
+  // Fonction qui récupère les commentaires dans l'administration et qui les approuve
   public function comments()
   {
     $commentManager = new CommentManager();
@@ -100,5 +107,24 @@ class Backend
 
     $comments = $commentManager->getPostComments($_GET['id']);
     require 'View/Backend/comments.php';
+  }
+
+  // Appel la fonction qui récupère les données du formulaire pour les commentaires signalés
+  public function commentSignal()
+  {
+    $commentManager = new CommentManager();
+
+    $comments = $commentManager->getCommentSignal();
+
+    require 'View/Backend/commentSignal.php';
+  }
+
+  public function deleteComment()
+  {
+    $commentManager = new CommentManager();
+
+      $commentManager->deleteCommentSignal();
+      header("Location: index.php?route=commentSignal");
+      require 'View/Backend/commentSignal.php';
   }
 }
