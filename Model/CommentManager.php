@@ -53,15 +53,22 @@ class CommentManager extends Manager
     }
   }
 
-  // Récupère les commentaires signalés
-  public function getCommentSignal()
+  public function getAllCommentsSignal()
   {
     $req = $this->db->prepare("SELECT * FROM description ORDER BY id DESC");
     $req->execute();
     return $req->fetchAll();
   }
 
-  public function deleteCommentSignal()
+  // Récupère le commentaire signalés
+  public function getCommentSignal($id)
+  {
+    $req = $this->db->prepare("SELECT * FROM description WHERE id = ? ORDER BY id DESC");
+    $req->execute(array($id));
+    return $req->fetch();
+  }
+
+  public function deleteCommentSignal($id)
   {
     $req = $this->db->prepare("DELETE FROM description WHERE id = ?");
     $req->execute(array($id));
