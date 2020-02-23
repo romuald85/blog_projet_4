@@ -1,14 +1,14 @@
 <?php ob_start(); ?>
 
-  <link rel="stylesheet" href="Public/css/post.css">
+  <link rel="stylesheet" href="public/css/post.css">
 
   <header class="header-image">
     <img src="img/paysage_alaska.jpg" alt="paysage_alaska" class="img-responsive image-paysage">
   </header>
 
-  <div class="container">
+  <div id="profile" class="container">
     <div class="row">
-      <div class="col-md-3 profile">
+      <div class="col-sm-3 profile">
         <aside class="aside">
           <img class="rounded-circle" id="image-alaska" src="img/alaska.jpg" alt="alaska-image">
           <h4>Billet pour l'Alaska</h4>
@@ -28,7 +28,7 @@
           </ul>
         </aside>
       </div>
-      <div id="col" class="col-md-8">
+      <div id="col" class="col-sm-8">
         <article>
           <header class="titre-article">
             <h2><?= $post->title ?></h2>

@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<a href="index.php?route=admin">Retour</a>
+<a href="index.php?route=admin" class="btn btn-danger">Retour</a>
 
 <h1 class="text-center">Commentaires signalés</h1>
   <div class="container">

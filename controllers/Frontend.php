@@ -25,6 +25,7 @@ class Frontend
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getCommentsApproved($_GET['id']);
     $idComments = $commentManager->getPostComments($_GET['id']);
+    // Pour afficher le message 'votre commentaire à bien été ajouté etc ...' après le post d'un commentaire
     $addComment = false;
     if(isset($_GET['addComment']) && $_GET['addComment'] === 'true')
     {
@@ -55,6 +56,8 @@ class Frontend
   public function alertComment()
   {
     $commentManager = new CommentManager();
+    // Pour afficher le message 'Votre alerte pour le signalement d'un commentaire a bien été prise en compte'
+    $addSignalComment = false;
 
     if(!isset($_GET['id']))
     {
@@ -66,6 +69,7 @@ class Frontend
       $commentManager->descriptionComment($_POST['email'], $_POST['titre'], $_POST['numero'], $_POST['message']);
       header("Location: index.php?route=post&id={$_GET['id']}");
     }
+
     require 'View/Frontend/alert.php';
   }
 
