@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-sm-3 profile">
         <aside>
-          <img class="rounded-circle" id="image-alaska" src="img/alaska.jpg" alt="alaska-image">
+          <img class="rounded-circle img-responsive" id="image-alaska" src="img/alaska.jpg" alt="alaska-image">
           <h4>Billet pour l'Alaska</h4>
           <p>jean-forteroche@gmail.com</p>
           <a class="twitter-follow-button" href="https://twitter.com/JeanForteroche" data-show-count="true" data-size="large">

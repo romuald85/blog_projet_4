@@ -8,11 +8,13 @@ use Model\UsersManager;
 
 class Backend
 {
+  /**
+   * Récupère le login et le mdp
+   */
   public function userExists()
   {
     $usersExists = new UsersManager();
 
-    // Récupère le login et le mdp
     if(!empty($_POST['login']) && !empty($_POST['password']))
     {
       if($usersExists->userExists($_POST['login'], $_POST['password']) === false)

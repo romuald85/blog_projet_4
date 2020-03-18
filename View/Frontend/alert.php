@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="public/css/alert.css">
 
-<a href="index.php?route=post&id=<?= $_GET['id'] ?>">Retour</a>
+<!--<a href="index.php?route=post&id=<?= $_GET['id'] ?>">Retour</a>-->
 
 <div class="container">
   <div class="row">

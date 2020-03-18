@@ -7,17 +7,20 @@ use Model\CommentManager;
 class Frontend
 {
 
+  /**
+   * Récupération de tous les posts en base de données
+   */
   public function listPosts()
   {
     $postManager = new PostManager();
 
-
-    // récupération des posts
     $posts = $postManager->getAll('posts');
     require 'View/Frontend/home.php';
   }
 
-  // Récupèration du post selon l'id et gère l'affichage du commentaire approuvé
+  /**
+   * Récupèration du post selon l'id et gère l'affichage du commentaire approuvé
+   */
   public function onePost()
   {
     $postManager = new PostManager();
@@ -35,7 +38,9 @@ class Frontend
     require 'View/Frontend/post.php';
   }
 
-  // Poste un commentaire
+  /**
+   * Ajoute un commentaire
+   */
   public function addComment()
   {
     $commentManager = new CommentManager();
@@ -49,10 +54,12 @@ class Frontend
     {
       $commentManager->postComment($_GET['id'], $_POST['author'], $_POST['comment']);
       header("Location: index.php?route=post&id={$_GET['id']}&addComment=true");
-    }
+    } 
   }
 
-  // Poster un commentaire à signaler
+  /**
+   * Signaler un commentaire
+   */
   public function alertComment()
   {
     $commentManager = new CommentManager();
@@ -71,6 +78,19 @@ class Frontend
     }
 
     require 'View/Frontend/alert.php';
+  }
+
+  public function alertCommentId()
+  {
+    $commentManager = new CommentManager();
+
+    if(isset($_GET['alert']))
+    {
+      $commentManager->postCommentAlert($_GET['id']);
+      header("Location: index.php?route=alert&id{$_GET['id']}");
+    }
+
+    require 'View/Frontend/post.php';
   }
 
     public function ellipsis($content)
