@@ -39,7 +39,7 @@
             <?= $post->content ?>
           </p>
         </article>
-        <h2 class="comment">Commentaires</h2><span><a href="index.php?route=alert&id=<?= $post->id ?>">Alerter</a></span>
+        <!--<h2 class="comment">Commentaires</h2><span><a href="index.php?route=alert&id=<?= $post->id ?>">Alerter</a></span>-->
         <?php if(!empty($comments)):?>
             <div class="col-md-8">
               <?php foreach($comments as $comment): ?>
@@ -48,7 +48,33 @@
                 </p>
                 <footer><small><b><?= $comment->author ?> </b>Posté le: <?= $comment->comment_date ?>
                   <br>
-                  <p>#<?= $comment->id ?></p></small></footer>
+                  <p>#<?= $comment->id ?></p></small>
+                    <a href="#" data-toggle="modal" data-target="#myModal">Signaler</a>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-12" >
+                        <div class="modal fade" id="myModal">
+                          <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h2>Signaler le commentaire</h2>
+                              </div>
+                              <div class="modal-body">
+                                <p>Vous voulez signaler un commentaire auprès de l'administrateur</p>
+                              </div>
+                              <div class="modal-footer">
+                              <form action="#" method="get">
+                                <a href="index.php?route=alert&id=<?= $comment->id ?>" type="submit" class="btn btn-default">Confirmer</a>
+                                <input class="btn btn-default" value="Annuler">
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </footer>
                 <hr>
                 <?php endforeach ?>
                   <?php endif ?>
@@ -60,12 +86,12 @@
                   <h3 class="write-comment">Écrivez votre commentaire</h3>
                   <label for="author">Auteur</label>
                   <br>
-                  <input id="author" type="text" name="author" class="form-control">
+                  <input id="author" type="text" name="author" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label for="comment">Commentaire</label>
                   <br>
-                  <textarea id="comment" name="comment" rows="6" cols="60" class="form-control">
+                  <textarea id="comment" name="comment" rows="6" cols="60" class="form-control" required>
                   </textarea>
                 </div>
                 <div>
