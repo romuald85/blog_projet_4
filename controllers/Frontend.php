@@ -33,6 +33,7 @@ class Frontend
     if(isset($_GET['addComment']) && $_GET['addComment'] === 'true')
     {
       $addComment = true;
+      header("Refresh:3;url=index.php?route=post&id={$_GET['id']}");
     }
 
     require 'View/Frontend/post.php';
