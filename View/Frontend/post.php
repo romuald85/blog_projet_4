@@ -49,11 +49,11 @@
                 <footer><small><b><?= $comment->author ?> </b>Posté le: <?= $comment->comment_date ?>
                   <br>
                   <p>#<?= $comment->id ?></p></small>
-                    <a href="#" data-toggle="modal" data-target="#myModal">Signaler</a>
-                  <div class="container">
+                    <a href="#" data-toggle="modal" data-target="#myModal-<?= $comment->id; ?>">Signaler</a>
+                    <div class="container">
                     <div class="row">
                       <div class="col-md-12" >
-                        <div class="modal fade" id="myModal">
+                        <div class="modal fade" id="myModal-<?= $comment->id; ?>" class="myModal">
                           <div class="modal-dialog modal-md">
                             <div class="modal-content">
                               <div class="modal-header">
