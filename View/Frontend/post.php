@@ -102,8 +102,7 @@
                 <div class="form-group">
                   <label for="comment">Commentaire</label>
                   <br>
-                  <textarea id="comment" name="comment" rows="6" cols="60" class="form-control" required>
-                  </textarea>
+                  <textarea id="comment" name="comment" rows="6" cols="60" class="form-control" required></textarea>
                 </div>
                 <div>
                   <button type="submit" class="btn btn-primary bouton">Valider</button>
