@@ -60,12 +60,23 @@
                                 <h2>Signaler le commentaire</h2>
                               </div>
                               <div class="modal-body">
-                                <p>Vous voulez signaler un commentaire auprès de l'administrateur</p>
+                              <div>
+                                <input type="radio" id="contenu-indesirable" name="reportComment" value="Contenu commercial indésirable ou spam">
+                                <label for="contenu-indesirable">Contenu commercial indésirable ou spam</label>
+                              </div>
+                              <div>
+                                <input type="radio" id="heurter" name="reportComment" value="Contenu pouvant heurter">
+                                <label for="heurter">Contenu pouvant heurter</label>
+                              </div>
+                              <div>
+                                <input type="radio" id="maltraitance" name="reportComment" value="Maltraitance d'enfants">
+                                <label for="maltraitance">Maltraitance d'enfants</label>
+                              </div>
                               </div>
                               <div class="modal-footer">
                               <form action="#" method="get">
+                                <input class="btn btn-default" data-dismiss="modal" value="Annuler">
                                 <a href="index.php?route=alert&id=<?= $comment->id ?>" type="submit" class="btn btn-default">Confirmer</a>
-                                <input class="btn btn-default" value="Annuler">
                               </form>
                               </div>
                             </div>
