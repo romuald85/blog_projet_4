@@ -85,10 +85,11 @@ class Frontend
   {
     $commentManager = new CommentManager();
 
-    if(isset($_GET['alert']))
+    if(isset($_GET['id']) && !empty($_GET['reportComment']))
     {
-      $commentManager->postCommentAlert($_GET['id']);
-      header("Location: index.php?route=alert&id{$_GET['id']}");
+      $commentManager->postCommentAlert($_GET['id'], $_GET['reportComment']);
+      $postId = $commentManager->getPostIdFromCommentId($_GET['id']);
+      header("Location: index.php?route=post&id={$postId}");
     }
 
     require 'View/Frontend/post.php';

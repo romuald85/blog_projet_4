@@ -20,7 +20,7 @@ $router->add('home', 'Frontend:listPosts');
 $router->add('post', 'Frontend:onePost');
 $router->add('post', 'Frontend:onePost');
 $router->add('showComment', 'Frontend:addComment');
-$router->add('alert', 'Frontend:alertComment');
+$router->add('alert', 'Frontend:alertCommentId');
 
 
 $router->add('login', 'Backend:userExists');

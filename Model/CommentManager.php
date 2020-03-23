@@ -77,6 +77,23 @@ class CommentManager extends Manager
     return $req->fetch();
   }
 
+  /**
+   * Renvoi l'identifiant du post qui correspont à l'identifiant d'un commentaire envoyer en parametre
+   * @var int id correspond à l'identifiant de commentaire
+   * @return int
+   */
+  public function getPostIdFromCommentId($id)
+  {
+    $req = $this->db->prepare(
+      "SELECT post_id AS identifiant
+      FROM `comments`
+      WHERE id = ?"
+    );
+    $req->execute(array($id));
+    $tmpClass = $req->fetch();
+    return $tmpClass->identifiant;
+  }
+
   public function deleteCommentSignal($id)
   {
     $req = $this->db->prepare("DELETE FROM description WHERE id = ?");

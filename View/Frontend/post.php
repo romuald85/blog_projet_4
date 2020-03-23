@@ -46,38 +46,39 @@
                 <p>
                   <?= $comment->comment ?>
                 </p>
-                <footer><small><b><?= $comment->author ?> </b>Posté le: <?= $comment->comment_date ?>
-                  <br>
-                  <p>#<?= $comment->id ?></p></small>
-                    <a href="#" data-toggle="modal" data-target="#myModal-<?= $comment->id; ?>">Signaler</a>
-                    <div class="container">
+                <footer>
+                  <p><small><b><?= $comment->author ?></b> Posté le: <?= $comment->comment_date ?></small></p>
+                  <p><a href="#" data-toggle="modal" data-target="#myModal-<?= $comment->id; ?>">Signaler</a></p>
+                  <div class="container">
                     <div class="row">
                       <div class="col-md-12" >
-                        <div class="modal fade" id="myModal-<?= $comment->id; ?>" class="myModal">
+                        <div class="modal fade myModal" id="myModal-<?= $comment->id; ?>">
                           <div class="modal-dialog modal-md">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h2>Signaler le commentaire</h2>
                               </div>
                               <div class="modal-body">
-                              <div>
-                                <input type="radio" id="contenu-indesirable" name="reportComment" value="Contenu commercial indésirable ou spam">
-                                <label for="contenu-indesirable">Contenu commercial indésirable ou spam</label>
-                              </div>
-                              <div>
-                                <input type="radio" id="heurter" name="reportComment" value="Contenu pouvant heurter">
-                                <label for="heurter">Contenu pouvant heurter</label>
-                              </div>
-                              <div>
-                                <input type="radio" id="maltraitance" name="reportComment" value="Maltraitance d'enfants">
-                                <label for="maltraitance">Maltraitance d'enfants</label>
-                              </div>
-                              </div>
-                              <div class="modal-footer">
-                              <form action="#" method="get">
-                                <input class="btn btn-default" data-dismiss="modal" value="Annuler">
-                                <a href="index.php?route=alert&id=<?= $comment->id ?>" type="submit" class="btn btn-default">Confirmer</a>
-                              </form>
+                                <form action="index.php" method="get">
+                                    <input type="hidden" name="route" value="alert" />
+                                    <input type="hidden" name="id" value="<?= $comment->id; ?>" />
+                                  <div>
+                                    <input type="radio" id="contenu-indesirable-<?= $comment->id; ?>" name="reportComment" value="commercial" />
+                                    <label for="contenu-indesirable-<?= $comment->id; ?>">Contenu commercial indésirable ou spam</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="heurter-<?= $comment->id; ?>" name="reportComment" value="heurter" />
+                                    <label for="heurter-<?= $comment->id; ?>">Contenu pouvant heurter</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" id="maltraitance-<?= $comment->id; ?>" name="reportComment" value="enfants" />
+                                    <label for="maltraitance-<?= $comment->id; ?>">Maltraitance d'enfants</label>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                    <button class="btn btn-primary" type="submit">Confirmer</button>
+                                  </div>
+                                </form>
                               </div>
                             </div>
                           </div>
@@ -85,23 +86,21 @@
                       </div>
                     </div>
                   </div>
-                  </footer>
-                <hr>
+                </footer>
+                <hr />
                 <?php endforeach ?>
-                  <?php endif ?>
             </div>
+            <?php endif ?>
           <div class="row">
             <div class="col-md-12 formulaire">
               <form action="index.php?route=showComment&id=<?= $post->id ?>" method="post">
                 <div class="form-group">
                   <h3 class="write-comment">Écrivez votre commentaire</h3>
                   <label for="author">Auteur</label>
-                  <br>
                   <input id="author" type="text" name="author" class="form-control" required>
                 </div>
                 <div class="form-group">
                   <label for="comment">Commentaire</label>
-                  <br>
                   <textarea id="comment" name="comment" rows="6" cols="60" class="form-control" required></textarea>
                 </div>
                 <div>
@@ -121,6 +120,5 @@
 
   <?php $content = ob_get_clean(); ?>
 
-    <script type="text/javascript" src="public/js/post.js"></script>
 
     <?php require 'template.php'; ?>
