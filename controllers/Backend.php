@@ -118,21 +118,12 @@ class Backend
 
     $comments = $commentManager->getAllCommentsSignal();
 
-    require 'View/Backend/commentSignal.php';
-  }
-
-  // Fonction qui récupère le commentaire signalé et qui les supprime
-  public function commentDelete()
-  {
-    $commentManager = new CommentManager();
-    $comment = $commentManager->getCommentSignal($_GET['id']);
-
     if(isset($_GET['action']) && $_GET['action'] === 'delete')
     {
       $commentManager->deleteCommentSignal($_GET['id']);
       header("Location: index.php?route=commentSignal");
     }
-    require 'View/Backend/commentDelete.php';
-  }
 
+    require 'View/Backend/commentSignal.php';
+  }
 }

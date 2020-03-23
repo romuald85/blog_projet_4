@@ -69,14 +69,6 @@ class CommentManager extends Manager
     return $req->fetchAll();
   }
 
-  // Récupère le commentaire signalés
-  public function getCommentSignal($id)
-  {
-    $req = $this->db->prepare("SELECT * FROM reportcomments WHERE id = ? ORDER BY id DESC");
-    $req->execute(array($id));
-    return $req->fetch();
-  }
-
   /**
    * Renvoi l'identifiant du post qui correspont à l'identifiant d'un commentaire envoyer en parametre
    * @var int id correspond à l'identifiant de commentaire
@@ -96,7 +88,7 @@ class CommentManager extends Manager
 
   public function deleteCommentSignal($id)
   {
-    $req = $this->db->prepare("DELETE FROM description WHERE id = ?");
+    $req = $this->db->prepare("DELETE FROM reportcomments WHERE id = ?");
     $req->execute(array($id));
   }
 }

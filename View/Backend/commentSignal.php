@@ -6,12 +6,9 @@
   <div class="container">
     <?php if(!empty($comments)): ?>
     <?php foreach($comments as $comment): ?>
-    <b>Email: </b><p><?= $comment->email ?></p>
-    <b>Titre de l'article: </b><p><?= $comment->title ?></p>
-    <b>Numero du commentaire: </b><p><?= $comment->numero ?></p>
-    <b>Message: </b><p><?= $comment->message ?></p>
-    <p><?= $comment->id ?></p>
-    <a href="index.php?route=commentDelete&id=<?= $comment->id ?>">Sélectionner le commentaire</a>
+    <b>Numéro du commentaire: </b><p><?= $comment->comment_id ?></p>
+    <b>Motif de signalement: </b><p><?= $comment->report ?></p>
+    <a href="index.php?route=commentSignal&id=<?= $comment->id ?>&action=delete">Supprimer</a>
     <hr>
     <?php endforeach; ?>
     <?php endif; ?>
