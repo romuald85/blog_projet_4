@@ -1,17 +1,23 @@
 <?php ob_start(); ?>
 
+<link rel="stylesheet" href="public/css/commentSignal.css">
+
 <a href="index.php?route=admin" class="btn btn-danger">Retour</a>
 
 <h1 class="text-center">Commentaires signalés</h1>
   <div class="container">
-    <?php if(!empty($comments)): ?>
-    <?php foreach($comments as $comment): ?>
-    <b>Numéro du commentaire: </b><p><?= $comment->comment_id ?></p>
-    <b>Motif de signalement: </b><p><?= $comment->report ?></p>
-    <a href="index.php?route=commentSignal&id=<?= $comment->id ?>&action=delete">Supprimer</a>
-    <hr>
-    <?php endforeach; ?>
-    <?php endif; ?>
+    <?php if(!empty($comments)):
+      foreach($comments as $comment): ?>
+        <p><b>Numéro du commentaire: </b><a href="index.php?route=post&id=<?= $comment->id_post; ?>#myComment-<?= $comment->id_comment; ?>"><?= $comment->id_comment; ?></a><span id="nb_report"><strong>Nombre de signalement:</strong> <?= $comment->nb_report ?></span></p>
+        <p><strong>Titre de l'article: </strong><?= $comment->title; ?></p>
+        <p><strong>Commentaire :</strong></p>
+        <p><?= $comment->comment; ?></p>
+        <p><b>Motif de signalement: </b><?= $comment->report; ?></p>
+        <a href="index.php?route=commentSignal&id=<?= $comment->id_report; ?>&action=delete">Annuler la r&eacute;clamation</a>
+        <a href="index.php?route=&id=<?= $comment->id_comment; ?>&action=delete">Annuler la r&eacute;clamation</a>
+        <hr>
+      <?php endforeach;
+    endif; ?>
   </div>
 
 

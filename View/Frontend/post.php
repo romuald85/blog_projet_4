@@ -43,10 +43,8 @@
         <?php if(!empty($comments)):?>
             <div class="col-md-8">
               <?php foreach($comments as $comment): ?>
-                <p>
-                  <?= $comment->comment ?>
-                </p>
-                <footer>
+                <div id="myComment-<?= $comment->id; ?>">
+                  <p><?= $comment->comment ?></p>
                   <p><small><b><?= $comment->author ?></b> Posté le: <?= $comment->comment_date ?></small></p>
                   <p><a href="#" data-toggle="modal" data-target="#myModal-<?= $comment->id; ?>">Signaler</a></p>
                   <div class="container">
@@ -86,7 +84,7 @@
                       </div>
                     </div>
                   </div>
-                </footer>
+                </div>
                 <hr />
                 <?php endforeach ?>
             </div>

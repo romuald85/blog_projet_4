@@ -43,16 +43,6 @@ class CommentManager extends Manager
     }
   }
 
-  // Poste les commentaires signalés
-  public function descriptionComment($mail, $title, $numero, $message)
-  {
-    if(isset($mail, $title, $numero, $message))
-    {
-      $req = $this->db->prepare("INSERT INTO description(email, title, numero, message) VALUES (?, ?, ?, ?)");
-      $req->execute(array($mail, $title, $numero, $message));
-    }
-  }
-
   public function postCommentAlert($comment_id, $report)
   {
     if(isset($comment_id, $report))
@@ -64,7 +54,25 @@ class CommentManager extends Manager
 
   public function getAllCommentsSignal()
   {
-    $req = $this->db->prepare("SELECT * FROM reportcomments ORDER BY id DESC");
+    $req = $this->db->prepare(
+      "SELECT
+        c.id AS id_comment,
+        rc.report,
+        p.title,
+        p.id AS id_post,
+        rc.id AS id_report,
+        c.comment,
+        COUNT(rc.id) AS nb_report 
+      FROM reportcomments AS rc
+      INNER JOIN comments AS c 
+        ON c.id = rc.comment_id
+      INNER JOIN posts AS p 
+        ON c.post_id = p.id
+      GROUP BY c.id
+      ORDER BY
+       nb_report DESC,
+       c.id DESC"
+    );
     $req->execute();
     return $req->fetchAll();
   }
