@@ -39,7 +39,7 @@ class CommentManager extends Manager
     if(isset($post_id, $author, $comment))
     {
       $req = $this->db->prepare("INSERT INTO comments(post_id, author, comment, comment_date) VALUES (?, ?, ?, NOW())");
-      $req->execute(array($post_id, $author, $comment));
+      $req->execute(array($post_id, trim($author), htmlspecialchars(trim($comment))));
     }
   }
 
