@@ -31,6 +31,7 @@ $router->add('update', 'Backend:updateArticle');
 $router->add('commentsAndPosts', 'Backend:commentsAndPosts');
 $router->add('comments', 'Backend:comments');
 $router->add('commentSignal', 'Backend:commentSignal');
+$router->add('approveComment', 'Backend:approveComment');
 $router->add('deleteComment', 'Backend:deleteComment');
 
 $router->get($route);

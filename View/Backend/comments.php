@@ -16,7 +16,7 @@ ob_start(); ?>
       </p>
       <?php if($comment->approved == 0): ?>
       <div>
-        <a href="index.php?route=comments&idComment=<?= $comment->id ?>&approved=true&id=<?= $_GET['id'] ?>">Approuver</a>
+        <a href="index.php?route=approveComment&idComment=<?= $comment->id ?>">Approuver</a>
       </div>
       <div>
         <a href="index.php?route=deleteComment&idComment=<?= $comment->id ?>">Supprimer</a>

@@ -111,6 +111,22 @@ class Backend
     require 'View/Backend/comments.php';
   }
 
+  public function approveComment()
+  {
+    $idComment = isset($_GET['idComment']) ? $_GET['idComment'] : null;
+
+    $commentManager = new CommentManager();
+
+    if(!$idComment || 0 >= $idComment)
+    {
+      header("Location: index.php?route=commentsAndPosts");
+    } else {
+      $idPost = $commentManager->getPostIdFromCommentId($idComment);
+      $commentManager->approveComment($idComment);
+      header("Location: index.php?route=comments&id={$idPost}");
+    }
+  }
+
   /**
    * supprime le commentaire avant qu'il apparaisse côté client
    */
