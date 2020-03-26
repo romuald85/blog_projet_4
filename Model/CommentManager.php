@@ -94,6 +94,12 @@ class CommentManager extends Manager
     return $tmpClass->identifiant;
   }
 
+  public function deleteComment($id)
+  {
+    $req = $this->db->prepare("DELETE FROM comments WHERE id = ?");
+    $req->execute(array($id));
+  }
+
   public function deleteCommentSignal($id)
   {
     $req = $this->db->prepare("DELETE FROM reportcomments WHERE id = ?");

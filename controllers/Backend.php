@@ -111,6 +111,24 @@ class Backend
     require 'View/Backend/comments.php';
   }
 
+  /**
+   * supprime le commentaire avant qu'il apparaisse côté client
+   */
+  public function deleteComment()
+  {
+    $idComment = isset($_GET['idComment']) ? $_GET['idComment'] : null;// affecte l'id comment avec null ou l'id comment en superglobal GET
+    $commentManager = new CommentManager();
+
+    // si l'id comment n'existe pas ou qu'il est inférieur à zero renvoi sur la page commentsAndPosts
+    if(!$idComment || 0 >= $idComment){
+      header("Location: index.php?route=commentsAndPosts");
+    } else {
+      $idPost = $commentManager->getPostIdFromCommentId($idComment);// récupère l'id du post en rapport avec l'id du commentaire
+      $commentManager->deleteComment($idComment);// supprime le commentaire en base de données
+      header("Location: index.php?route=comments&id={$idPost}");// redirige vers le post déterminé plus haut
+    }
+  }
+
   // Appel la fonction qui récupère les données du formulaire pour les commentaires signalés
   public function commentSignal()
   {

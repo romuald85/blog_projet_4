@@ -15,8 +15,14 @@ ob_start(); ?>
         <?= $comment->comment ?>
       </p>
       <?php if($comment->approved == 0): ?>
-      <a href="index.php?route=comments&idComment=<?= $comment->id ?>&approved=true&id=<?= $_GET['id'] ?>">Approuver</a>
+      <div>
+        <a href="index.php?route=comments&idComment=<?= $comment->id ?>&approved=true&id=<?= $_GET['id'] ?>">Approuver</a>
+      </div>
+      <div>
+        <a href="index.php?route=deleteComment&idComment=<?= $comment->id ?>">Supprimer</a>
+      </div>
     <?php endif ?>
+    <hr>
       <?php endforeach ?>
   </div>
   <?php endif ?>
