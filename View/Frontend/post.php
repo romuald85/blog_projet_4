@@ -98,11 +98,6 @@
                 <div>
                   <button type="submit" class="btn btn-primary bouton">Valider</button>
                 </div>
-                <?php if($addComment): ?>
-                  <div id="addComment" class="alert alert-primary" role="alert">
-                    Votre commentaire a bien été pris en compte, il est en attente d'approbation.
-                  </div>
-                  <?php endif; ?>
               </form>
             </div>
           </div>

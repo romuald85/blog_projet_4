@@ -21,19 +21,21 @@ class Frontend
   /**
    * Récupèration du post selon l'id et gère l'affichage du commentaire approuvé
    */
-  public function onePost()
+  public function showPost()
   {
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $refresh = isset($_GET['refresh']) ? $_GET['refresh'] : null;
+
     $postManager = new PostManager();
     $commentManager = new CommentManager();
-    $post = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getCommentsApproved($_GET['id']);
-    $idComments = $commentManager->getPostComments($_GET['id']);
+    $post = $postManager->getPost($id);
+    $comments = $commentManager->getCommentsApproved($id);
+    $idComments = $commentManager->getPostComments($id);
     // Pour afficher le message 'votre commentaire à bien été ajouté etc ...' après le post d'un commentaire
-    $addComment = false;
-    if(isset($_GET['addComment']) && $_GET['addComment'] === 'true')
+
+    if($refresh && 'true' === $refresh)
     {
-      $addComment = true;
-      header("Refresh:3;url=index.php?route=post&id={$_GET['id']}");
+      header("Refresh:3;url=index.php?route=post&id={$id}");
     }
 
     require 'View/Frontend/post.php';
@@ -44,58 +46,43 @@ class Frontend
    */
   public function addComment()
   {
-    $commentManager = new CommentManager();
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $author = isset($_POST['author']) ? $_POST['author'] : null;
+    $comment = isset($_POST['comment']) ? $_POST['comment'] : null;
 
-    if(!isset($_GET['id']) || empty($_GET['id']))
+    if(!$id || empty($id))
     {
       header('Location: index.php');
     }
 
-    if(!empty($_POST['author']) && !empty($_POST['comment']))
+    if(!empty($author) && !empty($comment))
     {
-      $commentManager->postComment($_GET['id'], $_POST['author'], $_POST['comment']);
-      header("Location: index.php?route=post&id={$_GET['id']}&addComment=true");
-    } 
+      $commentManager = new CommentManager();
+      $commentManager->postComment($id, $author, $comment);
+      setMessageFlash("Votre commentaire a bien été pris en compte, il est en attente d'approbation.", PRIMARY_MESSAGE);
+      header("Location: index.php?route=post&id={$id}&refresh=true");
+    }
   }
 
   /**
    * Signaler un commentaire
    */
-  public function alertComment()
+  public function reportComment()
   {
-    $commentManager = new CommentManager();
-    // Pour afficher le message 'Votre alerte pour le signalement d'un commentaire a bien été prise en compte'
-    $addSignalComment = false;
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $reportComment = isset($_GET['reportComment']) ? $_GET['reportComment'] : null;
 
-    if(!isset($_GET['id']))
+    if($id && $reportComment)
     {
-      header("Location: index.php");
+      $commentManager = new CommentManager();
+      $commentManager->postCommentAlert($id, $reportComment);
+      $postId = $commentManager->getPostIdFromCommentId($id);
+      setMessageFlash("Votre commentaire a bien été signalé l'administrateur confirmera le signalement si nécéssaire.", PRIMARY_MESSAGE);
+      header("Location: index.php?route=post&id={$postId}&refresh=true");
     }
-
-    if(!empty($_POST['email']) && !empty($_POST['titre']) && !empty($_POST['numero']) && !empty($_POST['message']))
-    {
-      $commentManager->descriptionComment($_POST['email'], $_POST['titre'], $_POST['numero'], $_POST['message']);
-      header("Location: index.php?route=post&id={$_GET['id']}");
-    }
-
-    require 'View/Frontend/alert.php';
   }
 
-  public function alertCommentId()
-  {
-    $commentManager = new CommentManager();
-
-    if(isset($_GET['id']) && !empty($_GET['reportComment']))
-    {
-      $commentManager->postCommentAlert($_GET['id'], $_GET['reportComment']);
-      $postId = $commentManager->getPostIdFromCommentId($_GET['id']);
-      header("Location: index.php?route=post&id={$postId}");
-    }
-
-    require 'View/Frontend/post.php';
-  }
-
-    public function ellipsis($content)
+  public function ellipsis($content)
   {
     return substr($content, 0, 250) . '...';
   }
