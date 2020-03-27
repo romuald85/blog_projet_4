@@ -15,6 +15,7 @@
     <header class="header-image">
       <img src="img/paysage_alaska.jpg" alt="paysage_alaska" class="img-responsive image-paysage">
     </header>
+    <?php showMessagesFlash(); ?>
     <?= $content ?>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>

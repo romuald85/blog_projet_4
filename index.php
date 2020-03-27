@@ -2,6 +2,7 @@
 session_start();
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Autoloader.php';
+require_once 'fonctions_utiles.php';
 
 use App\Router;
 
