@@ -1,6 +1,5 @@
 <?php
 namespace Controllers;
-session_start();
 
 use Model\PostManager;
 use Model\CommentManager;

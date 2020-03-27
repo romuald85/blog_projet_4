@@ -1,10 +1,5 @@
 <?php ob_start(); ?>
 
-  <link rel="stylesheet" href="Public/css/home.css">
-
-  <header class="header-image">
-    <img src="img/paysage_alaska.jpg" alt="paysage_alaska" class="img-responsive image-paysage">
-  </header>
   <div id="profile" class="container">
     <div class="row">
       <div class="col-sm-3 profile">
@@ -64,4 +59,4 @@
       }(document, "script", "twitter-wjs"));
     </script>
 
-    <?php require 'template.php';
+    <?php require 'template_front.php';

@@ -1,11 +1,4 @@
 <?php ob_start(); ?>
-
-  <link rel="stylesheet" href="public/css/post.css">
-
-  <header class="header-image">
-    <img src="img/paysage_alaska.jpg" alt="paysage_alaska" class="img-responsive image-paysage">
-  </header>
-
   <div id="profile" class="container">
     <div class="row">
       <div class="col-sm-3 profile">
@@ -119,4 +112,4 @@
   <?php $content = ob_get_clean(); ?>
 
 
-    <?php require 'template.php'; ?>
+    <?php require 'template_front.php'; ?>
