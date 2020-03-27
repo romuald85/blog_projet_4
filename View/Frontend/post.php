@@ -44,7 +44,7 @@
             <div class="col-md-8">
               <?php foreach($comments as $comment): ?>
                 <div id="myComment-<?= $comment->id; ?>">
-                  <p><?= $comment->comment ?></p>
+                  <p><?= nl2br($comment->comment) ?></p>
                   <p><small><b><?= $comment->author ?></b> Posté le: <?= $comment->comment_date ?></small></p>
                   <p><a href="#" data-toggle="modal" data-target="#myModal-<?= $comment->id; ?>">Signaler</a></p>
                   <div class="container">

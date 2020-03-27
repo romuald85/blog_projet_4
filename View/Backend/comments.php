@@ -12,7 +12,7 @@ ob_start(); ?>
        <p class="font-italic"><?= $comment->comment_date ?></p>
        <p>#<?= $comment->id ?></p>
       <p>
-        <?= $comment->comment ?>
+        <?= nl2br($comment->comment) ?>
       </p>
       <?php if($comment->approved == 0): ?>
       <div>
