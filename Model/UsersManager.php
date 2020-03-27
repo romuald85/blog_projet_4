@@ -3,12 +3,7 @@ namespace Model;
 
 class UsersManager extends Manager
 {
-  private $db;
-
-  public function __construct()
-  {
-    $this->db = $this->dbConnect();
-  }
+  protected $table = 'users';
 
   public function userExists($login, $password)
   {

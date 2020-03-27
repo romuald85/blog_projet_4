@@ -3,20 +3,7 @@ namespace Model;
 
 class PostManager extends Manager
 {
-  private $db;
-
-  public function __construct()
-  {
-    $this->db = $this->dbConnect();
-  }
-
-  // Récupère les articles
-  public function getAll($table)
-  {
-    $req = $this->db->prepare("SELECT * FROM {$table} ORDER BY id DESC");
-    $req->execute();
-    return $req->fetchAll();
-  }
+  protected $table = 'posts';
 
   // Récupère l'article en fonction de l'id
   public function getPost($id)

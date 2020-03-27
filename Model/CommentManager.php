@@ -3,12 +3,7 @@ namespace Model;
 
 class CommentManager extends Manager
 {
-  private $db;
-
-  public function __construct()
-  {
-    $this->db = $this->dbConnect();
-  }
+  protected $table = 'comments';
 
   // Récupère les commentaires
   public function getPostComments($id)
