@@ -32,6 +32,7 @@
             <?= $post->content ?>
           </p>
         </article>
+        <h3>Commentaires</h3>
         <!--<h2 class="comment">Commentaires</h2><span><a href="index.php?route=alert&id=<?= $post->id ?>">Alerter</a></span>-->
         <?php if(!empty($comments)):?>
             <div class="col-md-8">
