@@ -21,9 +21,14 @@ function setMessageFlash($message, $typeMessage = PRIMARY_MESSAGE){
     $_SESSION['messagesFlash'][] = array('message' => $message, 'type' => $typeMessage);
 }
 
+/**
+ * affiche les messages flash mis en forme et les supprimes de la session
+ */
 function showMessagesFlash(){
-    while(0 < count($_SESSION['messagesFlash'])){
-        $message = array_shift($_SESSION['messagesFlash']);
-        printf('<div class="messFlash alert alert-%s" role="alert">%s</div>', $message['type'], $message['message']);
+    if(isset($_SESSION['messagesFlash'])){
+        while(0 < count($_SESSION['messagesFlash'])){
+            $message = array_shift($_SESSION['messagesFlash']);
+            printf('<div class="messFlash alert alert-%s" role="alert">%s</div>', $message['type'], $message['message']);
+        }
     }
 }
