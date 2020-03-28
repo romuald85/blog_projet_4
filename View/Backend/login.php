@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="public/css/login.css">
 
   <div class="container">
-    <form action="" method="post">
+    <form action="#" method="post">
       <h2 class="text-center">Se connecter</h2>
       <div class="form-group">
         <label for="login">Identifiant</label>

@@ -12,7 +12,7 @@ class Backend
    */
   public function loginAdmin()
   {
-    if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+    if(isUserConnected()){
       setMessageFlash('Vous êtes déjà connecté', PRIMARY_MESSAGE);
       header("Location: index.php?route=admin");
       return false;// pour ne pas executer la suite de la fonction
@@ -52,12 +52,6 @@ class Backend
 
   public function indexAdmin()
   {
-    if(!isset($_SESSION['user']))
-    {
-      // Renvoi vers la page login si l' utilisateur n'existe pas
-      header('Location: index.php?route=login');
-    }
-
     if(isset($_GET['deconnect']))
     {
       // Fin de session de connexion
