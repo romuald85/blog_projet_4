@@ -5,7 +5,7 @@ class UsersManager extends Manager
 {
   protected $table = 'users';
 
-  public function userExists($login, $password)
+  public function exists($login, $password)
   {
     $result = false;
     $req = $this->db->prepare("SELECT login, password FROM users WHERE login = ? AND password = ?");

@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();// Entame la session
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Autoloader.php';
 require_once 'fonctions_utiles.php';
@@ -25,7 +25,8 @@ $router->add('showComment', 'Frontend:addComment');
 $router->add('alert', 'Frontend:reportComment');
 
 
-$router->add('login', 'Backend:userExists');
+$router->add('login', 'Backend:loginAdmin');
+$router->add('logout', 'Backend:logoutAdmin');
 $router->add('admin', 'Backend:admin');
 $router->add('articles', 'Backend:articles');
 $router->add('create', 'Backend:createArticle');

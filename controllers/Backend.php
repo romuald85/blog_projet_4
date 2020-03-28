@@ -8,29 +8,49 @@ use Model\UsersManager;
 class Backend
 {
   /**
-   * Récupère le login et le mdp
+   * Connecte l'utilisateur en ajoutant son login, qu'il a entré, à la session après l'avoir comparé ainsi que le mdp en base
    */
-  public function userExists()
+  public function loginAdmin()
   {
-    $usersExists = new UsersManager();
+    if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+      setMessageFlash('Vous êtes déjà connecté', PRIMARY_MESSAGE);
+      header("Location: index.php?route=admin");
+      return false;// pour ne pas executer la suite de la fonction
+    }
+    $login = isset($_POST['login']) ? trim($_POST['login']) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
 
-    if(!empty($_POST['login']) && !empty($_POST['password']))
-    {
-      if($usersExists->userExists($_POST['login'], $_POST['password']) === false)
+    // vérifie que le formulaire a été envoyé pour ne pas affiché des messages d'erreurs lorsque l'on arrive sur la page
+    if ('POST' == $_SERVER['REQUEST_METHOD']){
+      if(!empty($login) && !empty($password))
       {
-        echo 'Les identifiants sont invalides !';
-      }
-      else
+        $usersManager = new UsersManager();
+        if($usersManager->exists($login, $password) === false)
+        {
+          setMessageFlash('Les identifiants sont invalides !', DANGER_MESSAGE);
+        }
+        else
+        {
+          $_SESSION['user'] = $login;
+          setMessageFlash("Vous êtes connecté !", SUCCESS_MESSAGE);
+          header('Location: index.php?route=admin');
+        }
+      } else
       {
-        // Entame la session de connexion
-        $_SESSION['user'] = $_POST['login'];
-        header('Location: index.php?route=admin');
+        setMessageFlash('Les champs sont vides veuillez les remplir !', DANGER_MESSAGE);
       }
     }
     require 'View/Backend/login.php';
   }
 
-  public function admin()
+  public function logoutAdmin()
+  {
+    unset($_SESSION['user']);
+    setMessageFlash("Vous êtes deconnecté !", SUCCESS_MESSAGE);
+    header("Location: index.php?route=login");
+  }
+
+  public function indexAdmin()
   {
     if(!isset($_SESSION['user']))
     {
