@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS `reportcomments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_id` int(11) NOT NULL,
   `report` enum('commercial','heurter','enfants') NOT NULL,
-  `postSignal_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `comment_id` (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
@@ -241,10 +240,10 @@ INSERT INTO `comments` (`id`, `post_id`, `author`, `comment`, `comment_date`, `a
 -- Déchargement des données de la table `reportcomments`
 --
 
-INSERT INTO `reportcomments` (`id`, `comment_id`, `report`, `postSignal_id`) VALUES
-(14, 122, 'commercial', NULL),
-(15, 113, 'enfants', NULL),
-(16, 124, 'heurter', NULL);
+INSERT INTO `reportcomments` (`id`, `comment_id`, `report`) VALUES
+(14, 122, 'commercial'),
+(15, 113, 'enfants'),
+(16, 124, 'heurter');
 
 -- --------------------------------------------------------
 
