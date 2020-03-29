@@ -1,7 +1,7 @@
 <?php
 
 ob_start(); ?>
-<a href="index.php?route=commentsAndPosts" class="btn btn-danger">Retour</a>
+<a href="index.php?route=admin" class="btn btn-danger">Retour</a>
 
 <h2 class="text-center">Modérer les commentaires</h2>
 
@@ -14,16 +14,14 @@ ob_start(); ?>
       <p>
         <?= nl2br($comment->comment) ?>
       </p>
-      <?php if($comment->approved == 0): ?>
       <div>
         <a href="index.php?route=approveComment&idComment=<?= $comment->id ?>">Approuver</a>
       </div>
       <div>
         <a href="index.php?route=deleteComment&idComment=<?= $comment->id ?>">Supprimer</a>
       </div>
-    <?php endif ?>
-    <hr>
-      <?php endforeach ?>
+      <hr>
+    <?php endforeach ?>
   </div>
   <?php endif ?>
 

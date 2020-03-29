@@ -12,7 +12,7 @@ ob_start(); ?>
           <br>
           <p class="font-italic"><?= $post->creation_date ?></p>
           <p><?= $post->content ?></p>
-          <a href="index.php?route=comments&id=<?= $post->id ?>">Modérer les commentaires</a>
+          <a href="index.php?route=comments&type=<?php Model\CommentManager::TYPE_WAITING ?> &idPost=<?= $post->id ?>">Modérer les commentaires</a>
         </div>
       <?php endforeach; ?>
       <?php endif; ?>

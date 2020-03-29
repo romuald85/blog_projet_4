@@ -4,6 +4,10 @@ namespace Model;
 class CommentManager extends Manager
 {
   protected $table = 'comments';
+  
+  const TYPE_WAITING = 'waiting';
+
+  const COMMENTS_TYPE = array(self::TYPE_WAITING);// verifie que la const TYPE_WAITING fait partie du tableau
 
   // Récupère les commentaires
   public function getPostComments($id)
@@ -99,5 +103,22 @@ class CommentManager extends Manager
   {
     $req = $this->db->prepare("DELETE FROM reportcomments WHERE id = ?");
     $req->execute(array($id));
+  }
+
+  /**
+   * récupère les commentaires en attente pour les approuver ou non
+   * @return array[StdClass]
+   * @param string $type le type de commentaire. Doit faire parti de liste COMMENTS_TYPE
+   */
+  public function getComments($type)
+  {
+    if(!in_array($type, self::COMMENTS_TYPE)){
+      return false;
+    }
+    if($type = self::TYPE_WAITING){
+      $req = $this->db->prepare("SELECT * FROM `comments` WHERE approved IS NULL");
+      $req->execute();
+      return $req->fetchAll();
+    }
   }
 }

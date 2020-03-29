@@ -112,17 +112,17 @@ class Backend
     require 'View/Backend/commentsAndPosts.php';
   }
 
-  // Fonction qui récupère les commentaires dans l'administration et qui les approuve
-  public function comments()
+  /**
+   * liste les commentaires
+   */
+  public function listComments()
   {
+    $type = isset($_GET['type']) ? $_GET['type'] : null;
+
     $commentManager = new CommentManager();
 
-    if(isset($_GET['approved']) && $_GET['approved'] === 'true' && isset($_GET['idComment']) && !empty($_GET['idComment']))
-    {
-      $commentManager->approveComment($_GET['idComment']);
-    }
+    $comments = $commentManager->getComments($type);
 
-    $comments = $commentManager->getPostComments($_GET['id']);
     require 'View/Backend/comments.php';
   }
 

@@ -30,13 +30,14 @@ $router->add('logout', 'Backend:logoutAdmin');
 $router->add('create', 'Backend:createArticle');
 $router->add('update', 'Backend:updateArticle');
 $router->add('commentsAndPosts', 'Backend:commentsAndPosts');
-$router->add('comments', 'Backend:comments');
 $router->add('commentSignal', 'Backend:commentSignal');
 $router->add('admin', 'Backend:indexAdmin');
 
 $router->add('posts', 'Backend:listPosts');
 
 $router->add('approveComment', 'Backend:approveComment');
+
+$router->add('comments', 'Backend:listComments');
 $router->add('deleteComment', 'Backend:deleteComment');
 
 $router->get($route);
