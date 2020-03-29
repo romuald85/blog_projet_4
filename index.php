@@ -29,8 +29,6 @@ $router->add('login', 'Backend:loginAdmin');
 $router->add('logout', 'Backend:logoutAdmin');
 $router->add('create', 'Backend:createArticle');
 $router->add('update', 'Backend:updateArticle');
-$router->add('commentsAndPosts', 'Backend:commentsAndPosts');
-$router->add('commentSignal', 'Backend:commentSignal');
 $router->add('admin', 'Backend:indexAdmin');
 
 $router->add('posts', 'Backend:listPosts');
@@ -40,5 +38,10 @@ $router->add('rejectComment', 'Backend:rejectComment');
 
 $router->add('comments', 'Backend:listComments');
 $router->add('deleteComment', 'Backend:deleteComment');
+
+$router->add('reports', 'Backend:listReports');
+
+$router->add('approveReport', 'Backend:approveReport');
+$router->add('rejectReport', 'Backend:rejectReport');
 
 $router->get($route);

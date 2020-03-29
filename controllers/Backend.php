@@ -180,19 +180,51 @@ class Backend
     }
   }
 
-  // Appel la fonction qui récupère les données du formulaire pour les commentaires signalés
-  public function commentSignal()
+  /**
+   * affiche les commentaires signalés
+   */
+  public function listReports()
   {
-    $commentManager = new CommentManager();
+    $reportManager = new reportManager();
 
-    $comments = $commentManager->getAllCommentsSignal();
+    $comments = $reportManager->getAllReport();
+    require 'View/Backend/reports.php';
+  }
 
-    if(isset($_GET['action']) && $_GET['action'] === 'delete')
+  /**
+   * valide un signalement
+   */
+  public function approveReport()
+  {
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+    if(!$id || 0 >= $id)
     {
-      $commentManager->deleteCommentSignal($_GET['id']);
-      header("Location: index.php?route=commentSignal");
+      header("Location: index.php?route=admin");
+    } else {
+      $reportManager = new reportManager();
+      $reportManager->approveReport($id);
+      $idComment = $reportManager->getCommentIdFromReportId($id);
+      setMessageFlash("Le signalement du commentaire #{$idComment} a été validé");
+      header("Location: index.php?route=reports");
     }
+  }
 
-    require 'View/Backend/commentSignal.php';
+  /**
+   * invalide un signalement
+   */
+  public function rejectReport()
+  {
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+
+    if(!$id || 0 >= $id){
+      header("Location: index.php?route=reports");
+    } else {
+      $reportManager = new reportManager();
+      $reportManager->rejectReport($id);
+      $idComment = $reportManager->getCommentIdFromReportId($id);
+      setMessageFlash("Le signalement du commentaire #{$idComment} a été invalidé");
+      header("Location: index.php?route=reports");
+    }
   }
 }

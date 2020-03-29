@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `reportcomments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_id` int(11) NOT NULL,
   `report` enum('commercial','heurter','enfants') NOT NULL,
+  `approved` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `comment_id` (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
