@@ -61,13 +61,15 @@ class Backend
     require 'View/Backend/admin.php';
   }
 
-  // Récupère tous les articles
-  public function articles()
+  /**
+   * affiche tous les articles sur la vue article
+   */
+  public function listPosts()
   {
     $postManager = new PostManager();
     $posts = $postManager->getAll('posts');
 
-    require 'View/Backend/articles.php';
+    require 'View/Backend/posts.php';
   }
 
   public function createArticle()

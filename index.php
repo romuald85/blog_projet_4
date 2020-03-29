@@ -27,13 +27,15 @@ $router->add('alert', 'Frontend:reportComment');
 
 $router->add('login', 'Backend:loginAdmin');
 $router->add('logout', 'Backend:logoutAdmin');
-$router->add('admin', 'Backend:admin');
-$router->add('articles', 'Backend:articles');
 $router->add('create', 'Backend:createArticle');
 $router->add('update', 'Backend:updateArticle');
 $router->add('commentsAndPosts', 'Backend:commentsAndPosts');
 $router->add('comments', 'Backend:comments');
 $router->add('commentSignal', 'Backend:commentSignal');
+$router->add('admin', 'Backend:indexAdmin');
+
+$router->add('posts', 'Backend:listPosts');
+
 $router->add('approveComment', 'Backend:approveComment');
 $router->add('deleteComment', 'Backend:deleteComment');
 
