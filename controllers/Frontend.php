@@ -29,6 +29,9 @@ class Frontend
     $postManager = new PostManager();
     $commentManager = new CommentManager();
     $post = $postManager->getPost($id);
+    if(!$post){
+      header("Location: index.php?route=home");
+    }
     $comments = $commentManager->getCommentsApproved($id);
     $idComments = $commentManager->getPostComments($id);
     // Pour afficher le message 'votre commentaire à bien été ajouté etc ...' après le post d'un commentaire

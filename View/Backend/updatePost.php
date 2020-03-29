@@ -1,7 +1,7 @@
 <?php
 
 ob_start(); ?>
-  <a href="index.php?route=articles" class="btn btn-danger">Retour</a>
+  <a href="index.php?route=posts" class="btn btn-danger">Retour</a>
 
   <h1 class="text-center">Mon article à modifier: </h1>
 
@@ -25,7 +25,7 @@ ob_start(); ?>
         <button type="submit" class="btn btn-primary">Valider</button>
         <br>
       </div>
-      <a href="index.php?route=update&id=<?= $post->id ?>&action=delete" class="btn btn-danger">Supprimer l'article</a>
+      <a href="index.php?route=deletePost&id=<?= $post->id ?>" class="btn btn-danger">Supprimer l'article</a>
   </form>
   </div>
   <?php $content = ob_get_clean(); ?>

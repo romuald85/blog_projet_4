@@ -73,35 +73,55 @@ class Backend
     require 'View/Backend/posts.php';
   }
 
-  public function createArticle()
+  public function createPost()
   {
     $createPost = new PostManager();
     if(!empty($_POST['title']) && !empty($_POST['content']))
     {
       $createPost->createPost($_POST['title'], $_POST['content']);
-      header('Location: index.php?route=articles');
+      header('Location: index.php?route=posts');
     }
     require 'View/Backend/create.php';
   }
 
-  public function updateArticle()
+  public function updatePost()
+  { 
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $title = isset($_POST['title']) ? $_POST['title'] : null;
+    $content = isset($_POST['content']) ? $_POST['content'] : null;
+
+    if(!$id || 0 >= $id)
+    {
+      header("Location: index.php?route=admin");
+      return false;
+    }
+
+    $postManager = new PostManager();
+
+    if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($title) && !empty($content)) {
+      $postManager->updatePosts($id, $title, $content);
+      setMessageFlash("Votre article a bien été modifié ! ", SUCCESS_MESSAGE);
+    }
+
+    $post = $postManager->getPost($id);
+    require 'View/Backend/updatePost.php';
+  }
+
+  /**
+   * Fonction qui permet de supprimer un article
+   */
+  public function deletePost()
   {
-    $updatePost = new PostManager();
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-    if(!empty($_POST['title']) && !empty($_POST['content']))
+    if(!$id || 0 >= $id)
     {
-      $updatePost->updatePosts($_GET['id'], $_POST['title'], $_POST['content']);
-      header('Location: index.php?route=articles');
+      header("Location: index.php?route=admin");
+    } else {
+      $postManager = new PostManager();
+      $postManager->deletePost($id);
+      header('Location: index.php?route=posts');
     }
-
-    // Fonction qui permet de supprimer un article
-    if(isset($_GET['action']) && $_GET['action'] === 'delete')
-    {
-      $updatePost->deletePost($_GET['id']);
-      header('Location: index.php?route=articles');
-    }
-    $post = $updatePost->getPost($_GET['id']);
-    require 'View/Backend/update.php';
   }
 
   // Fonction qui récupère les articles dans la page commentsAndPosts sera affiché un lien qui renverra vers les commentaires de l'article en question

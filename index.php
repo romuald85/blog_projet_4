@@ -27,11 +27,12 @@ $router->add('alert', 'Frontend:reportComment');
 
 $router->add('login', 'Backend:loginAdmin');
 $router->add('logout', 'Backend:logoutAdmin');
-$router->add('create', 'Backend:createArticle');
-$router->add('update', 'Backend:updateArticle');
 $router->add('admin', 'Backend:indexAdmin');
 
 $router->add('posts', 'Backend:listPosts');
+$router->add('createPost', 'Backend:createPost');
+$router->add('updatePost', 'Backend:updatePost');
+$router->add('deletePost', 'Backend:deletePost');
 
 $router->add('approveComment', 'Backend:approveComment');
 $router->add('rejectComment', 'Backend:rejectComment');

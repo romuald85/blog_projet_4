@@ -3,7 +3,7 @@
 ob_start(); ?>
   <a href="index.php?route=admin" class="btn btn-danger">Retour</a>
   <br>
-  <a href="index.php?route=create" class="btn btn-primary">Écrire un nouvel article</a>
+  <a href="index.php?route=createPost" class="btn btn-primary">Écrire un nouvel article</a>
 
   <h1 class="text-center">Mes articles</h1>
 
@@ -16,7 +16,7 @@ ob_start(); ?>
               <p>
                 <?= $post->content ?>
               </p>
-              <a href="index.php?route=update&id=<?= $post->id ?>">Modifier l'article</a>
+              <a href="index.php?route=updatePost&id=<?= $post->id ?>">Modifier l'article</a>
             </div>
         <?php endforeach; ?>
           <?php endif; ?>
