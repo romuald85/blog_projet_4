@@ -4,6 +4,7 @@ namespace Controllers;
 use Model\PostManager;
 use Model\CommentManager;
 use Model\UsersManager;
+use Model\reportManager;
 
 class Backend
 {
@@ -126,19 +127,38 @@ class Backend
     require 'View/Backend/comments.php';
   }
 
+  /**
+   * approuve les commentaires pour qu'ils s'affichent côté client
+   */
   public function approveComment()
   {
     $idComment = isset($_GET['idComment']) ? $_GET['idComment'] : null;
 
-    $commentManager = new CommentManager();
-
     if(!$idComment || 0 >= $idComment)
     {
-      header("Location: index.php?route=commentsAndPosts");
+      header("Location: index.php?route=admin");
     } else {
+      $commentManager = new CommentManager();
+
       $idPost = $commentManager->getPostIdFromCommentId($idComment);
       $commentManager->approveComment($idComment);
-      header("Location: index.php?route=comments&id={$idPost}");
+      //header("Location: index.php?route=comments&id={$idPost}");
+      setMessageFlash("Le commentaire #{$idComment} a été approuvé", SUCCESS_MESSAGE);
+      header("Location: index.php?route=comments&type=" . \Model\CommentManager::TYPE_WAITING);
+    }
+  }
+
+  public function rejectComment()
+  {
+    $idComment = isset($_GET['idComment']) ? $_GET['idComment'] : null;
+
+    if(!$idComment || 0 >= $idComment){
+      header("Location: index.php?route=admin");
+    } else {
+      $commentManager = new CommentManager();
+      $commentManager->rejectComment($idComment);
+      setMessageFlash("Le commentaire #{$idComment} a été rejeté", SUCCESS_MESSAGE);
+      header("Location: index.php?route=comments&type=" . \Model\CommentManager::TYPE_WAITING);
     }
   }
 
@@ -150,9 +170,9 @@ class Backend
     $idComment = isset($_GET['idComment']) ? $_GET['idComment'] : null;// affecte l'id comment avec null ou l'id comment en superglobal GET
     $commentManager = new CommentManager();
 
-    // si l'id comment n'existe pas ou qu'il est inférieur à zero renvoi sur la page commentsAndPosts
+    // si l'id comment n'existe pas ou qu'il est inférieur à zero renvoi sur la page admin
     if(!$idComment || 0 >= $idComment){
-      header("Location: index.php?route=commentsAndPosts");
+      header("Location: index.php?route=admin");
     } else {
       $idPost = $commentManager->getPostIdFromCommentId($idComment);// récupère l'id du post en rapport avec l'id du commentaire
       $commentManager->deleteComment($idComment);// supprime le commentaire en base de données

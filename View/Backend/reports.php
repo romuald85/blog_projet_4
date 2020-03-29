@@ -13,8 +13,8 @@
         <p><strong>Commentaire :</strong></p>
         <p><?= $comment->comment; ?></p>
         <p><b>Motif de signalement: </b><?= $comment->report; ?></p>
-        <a href="index.php?route=commentSignal&id=<?= $comment->id_report; ?>&action=delete">Annuler la r&eacute;clamation</a>
-        <a href="index.php?route=&id=<?= $comment->id_comment; ?>&action=delete">Annuler la r&eacute;clamation</a>
+        <a href="index.php?route=rejectReport&id=<?= $comment->id_report; ?>">Annuler la r&eacute;clamation</a>
+        <a href="index.php?route=approveReport&id=<?= $comment->id_comment; ?>">Confirmer la r&eacute;clamation</a>
         <hr>
       <?php endforeach;
     endif; ?>

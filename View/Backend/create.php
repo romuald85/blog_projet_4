@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<a href="index.php?route=articles">Retour</a>
+<a href="index.php?route=posts">Retour</a>
 
 <div class="container">
   <form action="#" method="post">

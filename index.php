@@ -36,6 +36,7 @@ $router->add('admin', 'Backend:indexAdmin');
 $router->add('posts', 'Backend:listPosts');
 
 $router->add('approveComment', 'Backend:approveComment');
+$router->add('rejectComment', 'Backend:rejectComment');
 
 $router->add('comments', 'Backend:listComments');
 $router->add('deleteComment', 'Backend:deleteComment');

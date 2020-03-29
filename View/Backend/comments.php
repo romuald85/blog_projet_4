@@ -18,7 +18,7 @@ ob_start(); ?>
         <a href="index.php?route=approveComment&idComment=<?= $comment->id ?>">Approuver</a>
       </div>
       <div>
-        <a href="index.php?route=deleteComment&idComment=<?= $comment->id ?>">Supprimer</a>
+        <a href="index.php?route=rejectComment&idComment=<?= $comment->id ?>">Rejeter</a>
       </div>
       <hr>
     <?php endforeach ?>
