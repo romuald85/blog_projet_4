@@ -1,4 +1,6 @@
-<?php if('/blog/index.php?route=login' != $_SERVER['REQUEST_URI']){ redirectUnconnectedUsers(); } // ne redirige pas vers la page login si on est déjà dessus ?>
+<?php if('/blog/index.php?route=login' != $_SERVER['REQUEST_URI'] && !isUserConnected()){ 
+    header('Location: index.php?route=login');
+} // redirige vers la page login si il est sur une autre page et que l'utilisateur n'est pas connecté ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>

@@ -40,14 +40,3 @@ function showMessagesFlash(){
 function isUserConnected(){
     return isset($_SESSION['user']) && !empty($_SESSION['user']) ? true : false;
 }
-
-/**
- * redirige l'utilisateur vers la page login s'il n'est pas connecté
- */
-function redirectUnconnectedUsers(){
-    if(!isUserConnected())
-    {
-      // Renvoi vers la page login si l' utilisateur n'existe pas
-      header('Location: index.php?route=login');
-    }
-}
