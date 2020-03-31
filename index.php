@@ -11,14 +11,6 @@ Autoloader::register();
 
 $router = new Router();
 
-// Par défaut la route est définie à home
-$route = 'home';
-
-if(isset($_GET['route']))
-{
-  $route = $_GET['route'];
-}
-
 $router->add('home', 'Frontend:listPosts');
 $router->add('post', 'Frontend:showPost');
 $router->add('showComment', 'Frontend:addComment');
@@ -45,4 +37,9 @@ $router->add('reports', 'Backend:listReports');
 $router->add('approveReport', 'Backend:approveReport');
 $router->add('rejectReport', 'Backend:rejectReport');
 
-$router->get($route);
+
+// Par défaut la route est définie à home
+$route = isset($_GET['route']) ? $_GET['route']: 'home';
+
+// éxecute l'action du controller correspondant à la route
+$router->call($route);
