@@ -124,15 +124,6 @@ class Backend
     }
   }
 
-  // Fonction qui récupère les articles dans la page commentsAndPosts sera affiché un lien qui renverra vers les commentaires de l'article en question
-  public function commentsAndPosts()
-  {
-    $postManager = new PostManager();
-    $posts = $postManager->getAll('posts');
-
-    require 'View/Backend/commentsAndPosts.php';
-  }
-
   /**
    * liste les commentaires
    */
