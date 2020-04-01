@@ -73,17 +73,26 @@ class Backend
     require 'View/Backend/posts.php';
   }
 
+  /**
+   * pour créer article
+   */
   public function createPost()
   {
-    $createPost = new PostManager();
-    if(!empty($_POST['title']) && !empty($_POST['content']))
+    $title = isset($_POST['title']) ? $_POST['title'] : null;
+    $content = isset($_POST['content']) ? $_POST['content'] : null;
+
+    if(!empty($title) && !empty($content))
     {
-      $createPost->createPost($_POST['title'], $_POST['content']);
+      $createPost = new PostManager();
+      $createPost->createPost($title, $content);
       header('Location: index.php?route=posts');
     }
     require 'View/Backend/create.php';
   }
 
+  /**
+   * pour modifier un article
+   */
   public function updatePost()
   { 
     $id = isset($_GET['id']) ? $_GET['id'] : null;

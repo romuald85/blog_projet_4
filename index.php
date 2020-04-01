@@ -11,12 +11,13 @@ Autoloader::register();
 
 $router = new Router();
 
+/* ------------------ Front End ------------------ */
 $router->add('home', 'Frontend:listPosts');
 $router->add('post', 'Frontend:showPost');
 $router->add('addComment', 'Frontend:addComment');
 $router->add('alert', 'Frontend:reportComment');
 
-
+/* ------------------ BackEnd ------------------ */
 $router->add('login', 'Backend:loginAdmin');
 $router->add('logout', 'Backend:logoutAdmin');
 $router->add('admin', 'Backend:indexAdmin');
@@ -36,7 +37,6 @@ $router->add('reports', 'Backend:listReports');
 
 $router->add('approveReport', 'Backend:approveReport');
 $router->add('rejectReport', 'Backend:rejectReport');
-
 
 // Par défaut la route est définie à home
 $route = isset($_GET['route']) ? $_GET['route']: 'home';
