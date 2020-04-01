@@ -7,14 +7,14 @@ class UsersManager extends Manager
 
   public function exists($login, $password)
   {
-    $result = false;
-    $req = $this->db->prepare("SELECT login, password FROM users WHERE login = ? AND password = ?");
-    $req->execute(array($login, $password));
+    $req = $this->db->prepare("SELECT login, password FROM users WHERE login = ?");
+    $req->execute(array($login));
     // Passe le résultat de la  requête à true si les login sont bons
-    if($req->fetchAll())
+    $ok = false;
+    if($data = $req->fetch())
     {
-      $result = true;
+      $ok = password_verify($password, $data->password);
     }
-    return $result;
+    return $ok;
   }
 }

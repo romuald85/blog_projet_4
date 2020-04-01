@@ -44,6 +44,9 @@ class Backend
     require 'View/Backend/login.php';
   }
 
+  /**
+   * Met fin à la session 'user' et redirige vers la page login
+   */
   public function logoutAdmin()
   {
     unset($_SESSION['user']);
@@ -51,14 +54,11 @@ class Backend
     header("Location: index.php?route=login");
   }
 
+  /**
+   * affiche la page admin
+   */
   public function indexAdmin()
   {
-    if(isset($_GET['deconnect']))
-    {
-      // Fin de session de connexion
-      unset($_SESSION['user']);
-      header('Location: index.php?route=login');
-    }
     require 'View/Backend/admin.php';
   }
 

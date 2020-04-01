@@ -253,7 +253,7 @@ INSERT INTO `reportcomments` (`id`, `comment_id`, `report`) VALUES
 --
 
 INSERT INTO `users` (`id`, `login`, `password`) VALUES
-(1, 'romuald', 'romuald');
+(1, 'romuald', '$2y$10$vK5bPNmhxD7lK5RCaWyGZ.8cSstOr3WbpBJbh5Qaj4TtX7ZLV5u8C');--login:romuald,passord:romuald
 
 -- --------------------------------------------------------
 
