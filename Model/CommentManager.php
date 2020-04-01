@@ -17,10 +17,25 @@ class CommentManager extends Manager
     return $req->fetchAll();
   }
 
-  // Récupère les commentaires approuvés
+  /**
+   * Récupère les commentaires approuvés
+   */
   public function getCommentsApproved($id)
   {
-    $req = $this->db->prepare("SELECT c.id, post_id, author, comment, comment_date, approved FROM comments AS c JOIN posts AS p ON p.id = c.post_id WHERE p.id = ? AND approved = 1 ORDER BY c.id DESC");
+    $req = $this->db->prepare(
+      "SELECT c.*, rc.approved
+      FROM comments AS c
+      INNER JOIN posts AS p
+        ON p.id = c.post_id
+      LEFT JOIN reportcomments AS rc
+        ON c.id = rc.comment_id
+      WHERE p.id = ?
+        AND c.approved = 1
+      GROUP BY c.id
+      HAVING rc.approved = 0
+        OR rc.approved IS NULL
+      ORDER BY c.id DESC"
+    );
     $req->execute(array($id));
     return $req->fetchAll();
   }
@@ -55,15 +70,6 @@ class CommentManager extends Manager
     }
   }
 
-  public function postCommentAlert($comment_id, $report)
-  {
-    if(isset($comment_id, $report))
-    {
-      $req = $this->db->prepare("INSERT INTO reportcomments(comment_id, report) VALUES (?, ?)");
-      $req->execute(array($comment_id, $report));
-    }
-  }
-
   /**
    * Renvoi l'identifiant du post qui correspont à l'identifiant d'un commentaire envoyer en parametre
    * @var int id correspond à l'identifiant de commentaire
@@ -81,6 +87,9 @@ class CommentManager extends Manager
     return $tmpClass->identifiant;
   }
 
+  /**
+   * supprime un commentaire
+   */
   public function deleteComment($id)
   {
     $req = $this->db->prepare("DELETE FROM comments WHERE id = ?");

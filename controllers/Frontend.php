@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Model\PostManager;
 use Model\CommentManager;
+use Model\ReportManager;
 
 class Frontend
 {
@@ -33,9 +34,8 @@ class Frontend
       header("Location: index.php?route=home");
     }
     $comments = $commentManager->getCommentsApproved($id);
-    $idComments = $commentManager->getPostComments($id);
-    // Pour afficher le message 'votre commentaire à bien été ajouté etc ...' après le post d'un commentaire
 
+    // Pour effacer le message 'votre commentaire à bien été ajouté etc ...' après le post d'un commentaire on refresh la page apres 3 secondes
     if($refresh && 'true' === $refresh)
     {
       header("Refresh:3;url=index.php?route=post&id={$id}");
@@ -78,7 +78,8 @@ class Frontend
     if($id && $reportComment)
     {
       $commentManager = new CommentManager();
-      $commentManager->postCommentAlert($id, $reportComment);
+      $reportManager = new ReportManager();
+      $reportManager->reportComment($id, $reportComment);
       $postId = $commentManager->getPostIdFromCommentId($id);
       setMessageFlash("Votre commentaire a bien été signalé l'administrateur confirmera le signalement si nécéssaire.", PRIMARY_MESSAGE);
       header("Location: index.php?route=post&id={$postId}&refresh=true");

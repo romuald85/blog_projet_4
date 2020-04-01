@@ -4,7 +4,7 @@ namespace Controllers;
 use Model\PostManager;
 use Model\CommentManager;
 use Model\UsersManager;
-use Model\reportManager;
+use Model\ReportManager;
 
 class Backend
 {
@@ -205,7 +205,7 @@ class Backend
    */
   public function listReports()
   {
-    $reportManager = new reportManager();
+    $reportManager = new ReportManager();
 
     $comments = $reportManager->getAllReport();
     require 'View/Backend/reports.php';
@@ -222,9 +222,9 @@ class Backend
     {
       header("Location: index.php?route=admin");
     } else {
-      $reportManager = new reportManager();
-      $reportManager->approveReport($id);
+      $reportManager = new ReportManager();
       $idComment = $reportManager->getCommentIdFromReportId($id);
+      $reportManager->approveReport($idComment);
       setMessageFlash("Le signalement du commentaire #{$idComment} a été validé");
       header("Location: index.php?route=reports");
     }
@@ -240,9 +240,9 @@ class Backend
     if(!$id || 0 >= $id){
       header("Location: index.php?route=reports");
     } else {
-      $reportManager = new reportManager();
-      $reportManager->rejectReport($id);
+      $reportManager = new ReportManager();
       $idComment = $reportManager->getCommentIdFromReportId($id);
+      $reportManager->rejectReport($idComment);
       setMessageFlash("Le signalement du commentaire #{$idComment} a été invalidé");
       header("Location: index.php?route=reports");
     }

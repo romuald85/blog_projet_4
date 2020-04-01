@@ -85,7 +85,7 @@
             <?php endif ?>
           <div class="row">
             <div class="col-md-12 formulaire">
-              <form action="index.php?route=showComment&id=<?= $post->id ?>" method="post">
+              <form action="index.php?route=addComment&id=<?= $post->id ?>" method="post">
                 <div class="form-group">
                   <h3 class="write-comment">Écrivez votre commentaire</h3>
                   <label for="author">Auteur</label>

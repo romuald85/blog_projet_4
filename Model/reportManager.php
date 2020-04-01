@@ -1,7 +1,7 @@
 <?php 
 namespace Model;
 
-class reportManager extends Manager 
+class ReportManager extends Manager
 {
   protected $table = 'reportcomments';
 
@@ -42,22 +42,22 @@ class reportManager extends Manager
   }
 
   /**
-   * approuve le signalement en fonction de l'id
-   * @param int $id
+   * approuve le signalement en fonction de l'id de commentaire
+   * @param int $id l'id de commentaire
    */
   public function approveReport($id)
   {
-    $req = $this->db->prepare("UPDATE reportcomments SET approved = 1 WHERE id = ?");
+    $req = $this->db->prepare("UPDATE reportcomments SET approved = 1 WHERE comment_id = ?");
     $req->execute(array($id));
   }
 
   /**
-   * rejette le signalement en fonction de l'id
-   * @param int $id
+   * rejette le signalement en fonction de l'id de commentaire
+   * @param int $id l'id de commentaire
    */
   public function rejectReport($id)
   {
-    $req = $this->db->prepare("UPDATE reportcomments SET approved = 0 WHERE id = ?");
+    $req = $this->db->prepare("UPDATE reportcomments SET approved = 0 WHERE comment_id = ?");
     $req->execute(array($id));
   }
 
@@ -70,5 +70,17 @@ class reportManager extends Manager
     $req->execute(array($id));
     $tmpclass = $req->fetch();
     return $tmpclass->comment_id;
+  }
+
+  /**
+   * post les commentaires signalés
+   */
+  public function reportComment($comment_id, $report)
+  {
+    if(isset($comment_id, $report))
+    {
+      $req = $this->db->prepare("INSERT INTO reportcomments(comment_id, report) VALUES (?, ?)");
+      $req->execute(array($comment_id, $report));
+    }
   }
 }

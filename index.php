@@ -13,7 +13,7 @@ $router = new Router();
 
 $router->add('home', 'Frontend:listPosts');
 $router->add('post', 'Frontend:showPost');
-$router->add('showComment', 'Frontend:addComment');
+$router->add('addComment', 'Frontend:addComment');
 $router->add('alert', 'Frontend:reportComment');
 
 
