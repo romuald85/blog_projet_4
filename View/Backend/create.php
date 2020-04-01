@@ -6,13 +6,13 @@
     <div class="form-group">
       <label for="title">Titre</label>
       <br>
-      <input id="title" type="text" name="title" class="form-control">
+      <input id="title" type="text" name="title" class="form-control" required>
       <br>
     </div>
     <div class="form-group">
       <label for="content">Contenu</label>
       <br>
-      <textarea id="contentPost" name="content" rows="8" cols="80" class="form-control"></textarea>
+      <textarea id="contentPost" name="content" rows="8" cols="80" class="form-control" required></textarea>
       <br>
     </div>
     <div>
