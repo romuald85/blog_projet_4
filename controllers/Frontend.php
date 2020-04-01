@@ -49,7 +49,7 @@ class Frontend
    */
   public function addComment()
   {
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
     $author = isset($_POST['author']) ? $_POST['author'] : null;
     $comment = isset($_POST['comment']) ? $_POST['comment'] : null;
 
@@ -58,11 +58,15 @@ class Frontend
       header('Location: index.php');
     }
 
-    if(!empty($author) && !empty($comment))
-    {
-      $commentManager = new CommentManager();
-      $commentManager->postComment($id, $author, $comment);
-      setMessageFlash("Votre commentaire a bien été pris en compte, il est en attente d'approbation.", PRIMARY_MESSAGE);
+    if( 'POST' == $_SERVER['REQUEST_METHOD']){
+      if(!empty($author) && !empty($comment))
+      {
+        $commentManager = new CommentManager();
+        $commentManager->postComment($id, $author, $comment);
+        setMessageFlash("Votre commentaire a bien été pris en compte, il est en attente d'approbation.", PRIMARY_MESSAGE);
+      } else {
+        setMessageFlash("Veuillez remplir les champs obligatoires !", DANGER_MESSAGE);
+      }
       header("Location: index.php?route=post&id={$id}&refresh=true");
     }
   }
@@ -72,16 +76,20 @@ class Frontend
    */
   public function reportComment()
   {
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
-    $reportComment = isset($_GET['reportComment']) ? $_GET['reportComment'] : null;
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    $reportComment = isset($_POST['reportComment']) ? $_POST['reportComment'] : null;
 
-    if($id && $reportComment)
-    {
+    if( 'POST' == $_SERVER['REQUEST_METHOD']){
       $commentManager = new CommentManager();
-      $reportManager = new ReportManager();
-      $reportManager->reportComment($id, $reportComment);
       $postId = $commentManager->getPostIdFromCommentId($id);
-      setMessageFlash("Votre commentaire a bien été signalé l'administrateur confirmera le signalement si nécéssaire.", PRIMARY_MESSAGE);
+      if(!empty($id) && !empty($reportComment))
+      {
+        $reportManager = new ReportManager();
+        $reportManager->reportComment($id, $reportComment);
+        setMessageFlash("Votre commentaire a bien été signalé l'administrateur confirmera le signalement si nécéssaire.", PRIMARY_MESSAGE);
+      } else {
+        setMessageFlash("Veuillez séléctionner une option !", DANGER_MESSAGE);
+      }
       header("Location: index.php?route=post&id={$postId}&refresh=true");
     }
   }

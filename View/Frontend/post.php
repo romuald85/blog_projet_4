@@ -51,10 +51,11 @@
                                 <h2>Signaler le commentaire</h2>
                               </div>
                               <div class="modal-body">
-                                <form action="index.php" method="get">
+                                <form action="index.php" method="post">
                                     <input type="hidden" name="route" value="alert" />
                                     <input type="hidden" name="id" value="<?= $comment->id; ?>" />
                                   <div>
+                                    <p>Raison<span class="asterix">*</span></p>
                                     <input type="radio" id="contenu-indesirable-<?= $comment->id; ?>" name="reportComment" value="commercial" />
                                     <label for="contenu-indesirable-<?= $comment->id; ?>">Contenu commercial indésirable ou spam</label>
                                   </div>
@@ -69,6 +70,7 @@
                                   <div class="modal-footer">
                                     <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                     <button class="btn btn-primary" type="submit">Confirmer</button>
+                                    <p class="asterix">* Choix obligatoire</p>
                                   </div>
                                 </form>
                               </div>
@@ -85,18 +87,21 @@
             <?php endif ?>
           <div class="row">
             <div class="col-md-12 formulaire">
-              <form action="index.php?route=addComment&id=<?= $post->id ?>" method="post">
+              <form action="index.php" method="post">
+                <input type="hidden" name="id" value="<?= $post->id ?>" />
+                <input type="hidden" name="route" value="addComment" />
                 <div class="form-group">
                   <h3 class="write-comment">Écrivez votre commentaire</h3>
-                  <label for="author">Auteur</label>
+                  <label for="author">Auteur<span class="asterix">*</span></label>
                   <input id="author" type="text" name="author" class="form-control" required>
                 </div>
                 <div class="form-group">
-                  <label for="comment">Commentaire</label>
+                  <label for="comment">Commentaire<span class="asterix">*</span></label>
                   <textarea id="comment" name="comment" rows="6" cols="60" class="form-control" required></textarea>
                 </div>
                 <div>
                   <button type="submit" class="btn btn-primary bouton">Valider</button>
+                  <p class="asterix">* Champs obligatoires à remplir</p>
                 </div>
               </form>
             </div>

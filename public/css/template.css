@@ -3,3 +3,9 @@
     margin: 0 auto 20px;
     text-align: center;
 }
+
+.asterix{
+    color:red;
+    font-style: italic;
+    font-size: small;
+}

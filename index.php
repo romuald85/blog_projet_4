@@ -38,8 +38,14 @@ $router->add('reports', 'Backend:listReports');
 $router->add('approveReport', 'Backend:approveReport');
 $router->add('rejectReport', 'Backend:rejectReport');
 
-// Par défaut la route est définie à home
-$route = isset($_GET['route']) ? $_GET['route']: 'home';
+// gère les cas d'appel de la route
+if(isset($_GET['route'])){// cas où la route est défini en GET
+    $route = $_GET['route'];
+} else if (isset($_POST['route'])){// cas où la route est défini en POST
+    $route = $_POST['route'];
+} else {// Par défaut la route est définie à home
+    $route = 'home';
+}
 
 // éxecute l'action du controller correspondant à la route
 $router->call($route);

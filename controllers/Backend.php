@@ -81,11 +81,15 @@ class Backend
     $title = isset($_POST['title']) ? $_POST['title'] : null;
     $content = isset($_POST['content']) ? $_POST['content'] : null;
 
-    if(!empty($title) && !empty($content))
-    {
-      $createPost = new PostManager();
-      $createPost->createPost($title, $content);
-      header('Location: index.php?route=posts');
+    if( 'POST' == $_SERVER['REQUEST_METHOD']){
+      if(!empty($title) && !empty($content))
+      {
+        $createPost = new PostManager();
+        $createPost->createPost($title, $content);
+        header('Location: index.php?route=posts');
+      } else {
+        setMessageFlash("Veuillez remplir les champs !", DANGER_MESSAGE);
+      }
     }
     require 'View/Backend/create.php';
   }
@@ -95,7 +99,7 @@ class Backend
    */
   public function updatePost()
   { 
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : null;
     $title = isset($_POST['title']) ? $_POST['title'] : null;
     $content = isset($_POST['content']) ? $_POST['content'] : null;
 
@@ -107,9 +111,13 @@ class Backend
 
     $postManager = new PostManager();
 
-    if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty($title) && !empty($content)) {
-      $postManager->updatePosts($id, $title, $content);
-      setMessageFlash("Votre article a bien été modifié ! ", SUCCESS_MESSAGE);
+    if('POST' == $_SERVER['REQUEST_METHOD']) {
+      if(!empty($title) && !empty($content)) {
+        $postManager->updatePosts($id, $title, $content);
+        setMessageFlash("Votre article a bien été modifié ! ", SUCCESS_MESSAGE);
+      } else {
+        setMessageFlash("Veuillez remplir les champs obligatoires !", DANGER_MESSAGE);
+      }
     }
 
     $post = $postManager->getPost($id);
