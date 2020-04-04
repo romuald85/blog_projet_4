@@ -16,7 +16,7 @@ class Frontend
     $postManager = new PostManager();
 
     $posts = $postManager->getAll('posts');
-    require 'View/Frontend/home.php';
+    require 'view/frontend/home.php';
   }
 
   /**
@@ -41,7 +41,7 @@ class Frontend
       header("Refresh:3;url=index.php?route=post&id={$id}");
     }
 
-    require 'View/Frontend/post.php';
+    require 'view/frontend/post.php';
   }
 
   /**

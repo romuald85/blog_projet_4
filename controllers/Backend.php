@@ -41,7 +41,7 @@ class Backend
         setMessageFlash('Les champs sont vides veuillez les remplir !', DANGER_MESSAGE);
       }
     }
-    require 'View/Backend/login.php';
+    require 'view/backend/login.php';
   }
 
   /**
@@ -59,7 +59,7 @@ class Backend
    */
   public function indexAdmin()
   {
-    require 'View/Backend/admin.php';
+    require 'view/backend/admin.php';
   }
 
   /**
@@ -70,7 +70,7 @@ class Backend
     $postManager = new PostManager();
     $posts = $postManager->getAll('posts');
 
-    require 'View/Backend/posts.php';
+    require 'view/backend/posts.php';
   }
 
   /**
@@ -91,7 +91,7 @@ class Backend
         setMessageFlash("Veuillez remplir les champs !", DANGER_MESSAGE);
       }
     }
-    require 'View/Backend/create.php';
+    require 'view/backend/create.php';
   }
 
   /**
@@ -121,7 +121,7 @@ class Backend
     }
 
     $post = $postManager->getPost($id);
-    require 'View/Backend/updatePost.php';
+    require 'view/backend/updatePost.php';
   }
 
   /**
@@ -152,7 +152,7 @@ class Backend
 
     $comments = $commentManager->getComments($type);
 
-    require 'View/Backend/comments.php';
+    require 'view/backend/comments.php';
   }
 
   /**
@@ -216,7 +216,7 @@ class Backend
     $reportManager = new ReportManager();
 
     $comments = $reportManager->getAllReport();
-    require 'View/Backend/reports.php';
+    require 'view/backend/reports.php';
   }
 
   /**
